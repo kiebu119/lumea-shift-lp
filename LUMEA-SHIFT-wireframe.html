@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMEA SHIFT — ワイヤーフレーム</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #EAE3D9;
+    --accent: #D4BFA3;
+    --text: #333333;
+    --light: #F5F5F5;
+    --white: #FFFFFF;
+    --gray: #999;
+    --wire: #C8BFB5;
+    --wire-light: #EDE8E3;
+    --gold: #B8975A;
+    --section-gap: 60px;
+  }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #F8F6F3;
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* ===== HEADER ===== */
+  .wf-header {
+    background: var(--text);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .wf-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; letter-spacing: 0.15em; }
+  .wf-header span { font-size: 11px; color: var(--accent); letter-spacing: 0.1em; }
+
+  /* ===== NAV ===== */
+  .wf-nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--wire);
+    padding: 12px 24px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 53px;
+    z-index: 99;
+  }
+  .wf-nav a {
+    font-size: 11px;
+    color: var(--gray);
+    text-decoration: none;
+    padding: 4px 10px;
+    border: 1px solid var(--wire);
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .wf-nav a:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+  /* ===== LAYOUT ===== */
+  .wf-page {
+    max-width: 430px;
+    margin: 0 auto;
+    background: var(--white);
+    min-height: 100vh;
+    box-shadow: 0 0 40px rgba(0,0,0,0.08);
+  }
+
+  /* ===== SECTION BASE ===== */
+  .wf-section {
+    padding: 40px 20px;
+    border-bottom: 1px solid var(--wire-light);
+    position: relative;
+  }
+  .wf-section:last-child { border-bottom: none; }
+
+  /* セクションラベル */
+  .sec-label {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    background: var(--text);
+    padding: 3px 10px;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .sec-label.video { background: #6B4C3B; }
+  .sec-label.cta-label { background: var(--gold); }
+
+  /* ===== プレースホルダーブロック ===== */
+  .ph {
+    background: var(--wire-light);
+    border: 1.5px dashed var(--wire);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray);
+    font-size: 11px;
+    gap: 6px;
+    position: relative;
+  }
+  .ph-icon { font-size: 24px; opacity: 0.5; }
+  .ph-label { font-weight: 500; font-size: 11px; color: #888; }
+  .ph-sub { font-size: 10px; color: #aaa; }
+
+  .ph.video-ph {
+    background: #2A2420;
+    border-color: #6B4C3B;
+    color: #8B6F5E;
+  }
+  .ph.video-ph .ph-label { color: #C4A882; }
+  .ph.video-ph .ph-sub { color: #7A6355; }
+
+  /* ===== テキストプレースホルダー ===== */
+  .text-ph { height: 12px; background: var(--wire-light); border-radius: 2px; margin-bottom: 8px; }
+  .text-ph.short { width: 40%; }
+  .text-ph.mid { width: 65%; }
+  .text-ph.long { width: 90%; }
+  .text-ph.full { width: 100%; }
+  .text-ph.dark { background: rgba(255,255,255,0.15); }
+
+  /* ===== ボタンプレースホルダー ===== */
+  .btn-ph {
+    height: 52px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    cursor: default;
+  }
+  .btn-ph.primary { background: var(--text); color: white; }
+  .btn-ph.secondary { background: transparent; border: 1px solid var(--text); color: var(--text); }
+  .btn-ph.gold { background: var(--gold); color: white; }
+  .btn-ph.line { background: #06C755; color: white; }
+
+  /* ===== アノテーション ===== */
+  .anno {
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #FFF8E7;
+    border: 1px solid #F0D080;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 10px;
+    color: #8B6A00;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .note {
+    font-size: 10px;
+    color: var(--gray);
+    background: #FFFBF5;
+    border-left: 2px solid var(--accent);
+    padding: 6px 10px;
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  /* ===== タイトル系 ===== */
+  .wf-title-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .wf-title-jp {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .wf-body {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+
+  /* ===== グリッド系 ===== */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+  /* ===== カード ===== */
+  .card {
+    border: 1px solid var(--wire);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .card-body { padding: 12px; }
+
+  /* ===== バッジ ===== */
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .badge.new { background: var(--gold); color: white; }
+  .badge.free { background: #4A7C59; color: white; }
+
+  /* ===== ナビゲーションバー（LP内） ===== */
+  .lp-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--wire-light);
+    background: var(--white);
+  }
+
+  /* ===== ステップ系 ===== */
+  .step-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--wire-light);
+  }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--text);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* ===== 星 ===== */
+  .stars { color: #E4B84E; font-size: 14px; letter-spacing: 2px; }
+
+  /* ===== FAQ ===== */
+  .faq-item {
+    border-bottom: 1px solid var(--wire-light);
+    padding: 14px 0;
+  }
+  .faq-q {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+  .faq-q span { color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 16px; }
+
+  /* ===== 価格 ===== */
+  .price-box {
+    background: var(--wire-light);
+    border: 1px solid var(--wire);
+    border-radius: 4px;
+    padding: 16px;
+    text-align: center;
+  }
+  .price-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    color: var(--text);
+    font-weight: 300;
+  }
+  .price-sub { font-size: 10px; color: var(--gray); margin-top: 4px; }
+  .price-original { font-size: 12px; color: var(--gray); text-decoration: line-through; }
+
+  /* ===== 成分タグ ===== */
+  .ingredient-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ingredient-tag {
+    font-size: 10px;
+    padding: 4px 10px;
+    border: 1px solid var(--wire);
+    border-radius: 20px;
+    color: #666;
+  }
+
+  /* ===== フッター ===== */
+  .wf-footer { background: var(--text); color: #999; padding: 24px 20px; font-size: 10px; }
+
+  /* ===== スクロールバー ===== */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #f0f0f0; }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+  /* ===== 凡例 ===== */
+  .legend {
+    max-width: 430px;
+    margin: 0 auto 20px;
+    padding: 16px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: var(--white);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 10px; color: #666; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+
+  .progress-bar {
+    display: flex;
+    max-width: 430px;
+    margin: 16px auto 0;
+    gap: 2px;
+  }
+  .progress-step {
+    flex: 1;
+    height: 3px;
+    background: var(--wire);
+    border-radius: 2px;
+  }
+  .progress-step.done { background: var(--text); }
+</style>
+</head>
+<body>
+
+<!-- STICKY HEADER -->
+<div class="wf-header">
+  <h1>LUMEA SHIFT</h1>
+  <span>WIREFRAME — SP版</span>
+</div>
+
+<!-- SECTION NAV -->
+<div class="wf-nav">
+  <a href="#fv">① FV</a>
+  <a href="#problem">② 悩み</a>
+  <a href="#solution">③ 解決</a>
+  <a href="#product">④ 商品</a>
+  <a href="#scene">⑤ 使用シーン</a>
+  <a href="#benefit">⑥ ベネフィット</a>
+  <a href="#voice">⑦ 口コミ</a>
+  <a href="#faq">⑧ FAQ</a>
+  <a href="#cta">⑨ CTA</a>
+  <a href="#footer">⑩ Footer</a>
+</div>
+
+<!-- 凡例 -->
+<div style="max-width:430px; margin: 16px auto 0; padding: 0 16px;">
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#EDE8E3; border: 1.5px dashed #C8BFB5;"></div>静止画プレースホルダー</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2A2420; border: 1.5px dashed #6B4C3B;"></div>動画プレースホルダー</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#FFF8E7; border: 1px solid #F0D080;"></div>設計メモ</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#FFFBF5; border-left: 2px solid #D4BFA3;"></div>コーチへのNote</div>
+  </div>
+</div>
+
+<!-- LP本体 -->
+<div class="wf-page" style="margin-top: 16px; margin-bottom: 40px;">
+
+  <!-- ① FV -->
+  <section class="wf-section" id="fv" style="padding: 0; background: #1A1714;">
+    <div class="sec-label video" style="margin: 0; border-radius: 0; width: 100%; text-align: center; padding: 6px;">① FIRST VIEW</div>
+
+    <!-- 動画背景 -->
+    <div class="ph video-ph" style="height: 520px; border-radius: 0; border: none; border-bottom: 2px dashed #6B4C3B;">
+      <div class="ph-icon">▶</div>
+      <div class="ph-label">動画 / 静止画スライド（フルスクリーン）</div>
+      <div class="ph-sub">生成キャラ × 商品 / 朝の支度シーン</div>
+      <div class="ph-sub" style="margin-top: 4px;">推奨：縦型・9:16・暗めトーン</div>
+    </div>
+
+    <!-- FVテキストオーバーレイ -->
+    <div style="padding: 28px 24px 32px; background: #1A1714;">
+      <p style="font-size: 10px; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 10px; font-family: 'Cormorant Garamond', serif;">LUMEA SHIFT</p>
+      <div style="font-size: 22px; font-weight: 300; color: #F5F0EA; line-height: 1.6; margin-bottom: 8px;">
+        帰宅が遅い日は、<br>全部やるの無理。
+      </div>
+      <div style="font-size: 12px; color: #888; margin-bottom: 24px; line-height: 1.7;">
+        1本で整える。それでいい。
+      </div>
+      <div class="btn-ph gold" style="margin-bottom: 10px;">まず1本、試してみる →</div>
+      <div style="text-align: center; font-size: 10px; color: #666;">初回¥1,980 / 縛りなし / 送料無料</div>
+    </div>
+
+    <div class="note" style="margin: 0 16px 20px; border-radius: 4px;">
+      💡 FV動画案：Veo3.1で生成。朝の洗面台・キャラが商品を使うシーン（3〜5秒）をループ or 静止画3枚スライド。音声はElevenLabsで「1本でいい」系のナレーション。
+    </div>
+  </section>
+
+  <!-- 信頼バー -->
+  <section style="padding: 16px 20px; background: var(--cream); display: flex; justify-content: space-around; text-align: center; border-bottom: 1px solid var(--wire-light);">
+    <div>
+      <div style="font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--text);">1本</div>
+      <div style="font-size: 9px; color: #888;">完結スキンケア</div>
+    </div>
+    <div style="border-left: 1px solid var(--wire);">
+      <div style="font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--text);">朝夜</div>
+      <div style="font-size: 9px; color: #888;">どちらも使える</div>
+    </div>
+    <div style="border-left: 1px solid var(--wire);">
+      <div style="font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--text);">縛り</div>
+      <div style="font-size: 9px; color: #888;">なし・いつでも解約</div>
+    </div>
+  </section>
+
+  <!-- ② 悩みセクション -->
+  <section class="wf-section" id="problem" style="background: var(--light);">
+    <div class="sec-label">② PROBLEM — 悩み</div>
+    <div class="wf-title-en">DOES THIS SOUND FAMILIAR?</div>
+    <div class="wf-title-jp">こんな日、ありませんか？</div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+      <div style="background: var(--white); border-left: 3px solid var(--accent); padding: 12px 14px; border-radius: 0 4px 4px 0;">
+        <div class="ph video-ph" style="height: 80px; margin-bottom: 8px; border-radius: 4px;">
+          <div style="font-size: 10px;">動画 or 静止画（朝ギリギリのシーン）</div>
+        </div>
+        <div style="font-size: 12px; color: var(--text);">帰宅が遅くて、スキンケアをサボってしまった</div>
+      </div>
+      <div style="background: var(--white); border-left: 3px solid var(--accent); padding: 12px 14px; border-radius: 0 4px 4px 0;">
+        <div class="ph" style="height: 80px; margin-bottom: 8px; border-radius: 4px;">
+          <div style="font-size: 10px;">静止画（洗顔だけで終わるシーン）</div>
+        </div>
+        <div style="font-size: 12px; color: var(--text);">化粧水・美容液・乳液…続かない</div>
+      </div>
+      <div style="background: var(--white); border-left: 3px solid var(--accent); padding: 12px 14px; border-radius: 0 4px 4px 0;">
+        <div class="ph" style="height: 80px; margin-bottom: 8px; border-radius: 4px;">
+          <div style="font-size: 10px;">静止画（疲れた表情・鏡前）</div>
+        </div>
+        <div style="font-size: 12px; color: var(--text);">ズボラだと思われたくないけど、余裕がない</div>
+      </div>
+    </div>
+
+    <div class="note">💡 各カードに動画or静止画を1枚ずつ。AIキャラ使用。あえて暗めの表情・疲れた感じで共感を狙う。</div>
+  </section>
+
+  <!-- ③ 解決セクション -->
+  <section class="wf-section" id="solution">
+    <div class="sec-label">③ SOLUTION — 解決</div>
+    <div class="wf-title-en">THE ANSWER</div>
+    <div class="wf-title-jp">工程を減らすのが、<br>正解だった。</div>
+    <div class="wf-body">完璧じゃなくていい。整えるだけでいい。<br>LUMEA SHIFTは、1本で完結するために生まれました。</div>
+
+    <!-- 解決動画 -->
+    <div class="ph video-ph" style="height: 200px; border-radius: 4px; margin-bottom: 16px;">
+      <div class="ph-icon">▶</div>
+      <div class="ph-label">動画（Before→Afterのイメージ）</div>
+      <div class="ph-sub">複数ステップ → 1本に集約するアニメーション</div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-top: 1px solid var(--wire-light); border-bottom: 1px solid var(--wire-light); margin-bottom: 16px;">
+      <div style="text-align: center; flex: 1;">
+        <div style="font-size: 10px; color: var(--gray); margin-bottom: 4px;">今まで</div>
+        <div style="font-size: 11px; color: #999;">化粧水<br>美容液<br>乳液<br>…</div>
+      </div>
+      <div style="font-size: 24px; color: var(--accent); padding: 0 12px;">→</div>
+      <div style="text-align: center; flex: 1; background: var(--cream); padding: 12px; border-radius: 4px;">
+        <div style="font-size: 10px; color: var(--gold); margin-bottom: 4px; font-weight: 500;">LUMEA SHIFT</div>
+        <div style="font-size: 16px; font-weight: 500; color: var(--text);">1本</div>
+        <div style="font-size: 10px; color: #888;">で完結</div>
+      </div>
+    </div>
+    <div class="note">💡 アニメーション or 静止画で「複数→1本」の視覚的変換を見せる。Typologyを参考にシンプルに。</div>
+  </section>
+
+  <!-- ④ 商品説明 -->
+  <section class="wf-section" id="product" style="background: var(--cream);">
+    <div class="sec-label">④ PRODUCT — 商品説明</div>
+    <div class="wf-title-en">ABOUT THE PRODUCT</div>
+    <div class="wf-title-jp">LUMEA SHIFT</div>
+    <div class="wf-body" style="font-size: 11px; color: #888; margin-bottom: 4px;">朝夜兼用オールインワン美容液 50mL</div>
+
+    <!-- 商品画像 -->
+    <div class="ph" style="height: 280px; border-radius: 4px; margin-bottom: 20px; background: white;">
+      <div class="ph-icon">📦</div>
+      <div class="ph-label">商品画像（生成）</div>
+      <div class="ph-sub">白背景 / ボトル単体 / 高級感</div>
+    </div>
+
+    <!-- 特徴リスト -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+      <div style="background: var(--white); padding: 14px 12px; border-radius: 4px; text-align: center;">
+        <div style="font-size: 18px; margin-bottom: 6px;">⏱</div>
+        <div style="font-size: 11px; font-weight: 500; color: var(--text); margin-bottom: 4px;">時短</div>
+        <div style="font-size: 10px; color: var(--gray);">1本で完結</div>
+      </div>
+      <div style="background: var(--white); padding: 14px 12px; border-radius: 4px; text-align: center;">
+        <div style="font-size: 18px; margin-bottom: 6px;">🌙</div>
+        <div style="font-size: 11px; font-weight: 500; color: var(--text); margin-bottom: 4px;">朝夜OK</div>
+        <div style="font-size: 10px; color: var(--gray);">どちらでも使える</div>
+      </div>
+      <div style="background: var(--white); padding: 14px 12px; border-radius: 4px; text-align: center;">
+        <div style="font-size: 18px; margin-bottom: 6px;">✋</div>
+        <div style="font-size: 11px; font-weight: 500; color: var(--text); margin-bottom: 4px;">ベタつきにくい</div>
+        <div style="font-size: 10px; color: var(--gray);">軽いテクスチャ</div>
+      </div>
+      <div style="background: var(--white); padding: 14px 12px; border-radius: 4px; text-align: center;">
+        <div style="font-size: 18px; margin-bottom: 6px;">👥</div>
+        <div style="font-size: 11px; font-weight: 500; color: var(--text); margin-bottom: 4px;">男女兼用</div>
+        <div style="font-size: 10px; color: var(--gray);">性別問わず使える</div>
+      </div>
+    </div>
+
+    <!-- 成分 -->
+    <div style="margin-bottom: 16px;">
+      <div style="font-size: 11px; font-weight: 500; color: var(--text); margin-bottom: 10px;">主な配合成分</div>
+      <div class="ingredient-tags">
+        <span class="ingredient-tag">ヒアルロン酸Na</span>
+        <span class="ingredient-tag">加水分解コラーゲン</span>
+        <span class="ingredient-tag">セラミドNP</span>
+        <span class="ingredient-tag">ナイアシンアミド</span>
+        <span class="ingredient-tag">スクワラン</span>
+        <span class="ingredient-tag">グリセリン</span>
+      </div>
+    </div>
+    <div class="note">💡 商品画像はAI生成（白ボトル×ゴールドロゴ想定）。成分はシンプルタグで見せる。Typologyスタイル参考。</div>
+  </section>
+
+  <!-- ⑤ 使用シーン -->
+  <section class="wf-section" id="scene">
+    <div class="sec-label">⑤ SCENE — 使用シーン</div>
+    <div class="wf-title-en">HOW TO USE</div>
+    <div class="wf-title-jp">忙しい日の、<br>頼れる1本。</div>
+
+    <!-- メイン動画（ここがLP内動画の核） -->
+    <div class="ph video-ph" style="height: 260px; border-radius: 4px; margin-bottom: 20px; border: 2px dashed #B8975A;">
+      <div class="ph-icon" style="font-size: 32px;">▶</div>
+      <div class="ph-label" style="color: #E8C87A; font-size: 13px;">★ メイン動画（LP内の核）</div>
+      <div class="ph-sub">キャラ × 商品 / 朝・夜の使用シーン</div>
+      <div class="ph-sub">Veo3.1生成 → CapCut編集</div>
+      <div class="ph-sub">目安：15〜20秒</div>
+    </div>
+
+    <!-- 朝・夜タブイメージ -->
+    <div style="display: flex; gap: 0; margin-bottom: 16px; border: 1px solid var(--wire); border-radius: 4px; overflow: hidden;">
+      <div style="flex: 1; background: var(--cream); padding: 12px; text-align: center; border-right: 1px solid var(--wire);">
+        <div style="font-size: 10px; color: var(--gold); font-weight: 500; margin-bottom: 4px;">☀ 朝</div>
+        <div class="ph" style="height: 100px; border-radius: 4px; margin-bottom: 8px;">
+          <div style="font-size: 10px;">静止画<br>朝の洗面台</div>
+        </div>
+        <div style="font-size: 11px; color: #666; line-height: 1.6;">出勤前30秒。<br>洗顔後これだけ。</div>
+      </div>
+      <div style="flex: 1; background: #1A1714; padding: 12px; text-align: center;">
+        <div style="font-size: 10px; color: var(--accent); font-weight: 500; margin-bottom: 4px;">🌙 夜</div>
+        <div class="ph video-ph" style="height: 100px; border-radius: 4px; margin-bottom: 8px;">
+          <div style="font-size: 10px;">動画<br>帰宅後シーン</div>
+        </div>
+        <div style="font-size: 11px; color: #888; line-height: 1.6;">疲れた日も<br>これ1本でOK。</div>
+      </div>
+    </div>
+
+    <!-- 使い方ステップ -->
+    <div style="margin-bottom: 12px;">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div>
+          <div style="font-size: 12px; font-weight: 500; margin-bottom: 2px;">洗顔後、適量を手に取る</div>
+          <div style="font-size: 11px; color: var(--gray);">2〜3プッシュが目安</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div>
+          <div style="font-size: 12px; font-weight: 500; margin-bottom: 2px;">顔全体になじませる</div>
+          <div style="font-size: 11px; color: var(--gray);">これだけでOK</div>
+        </div>
+      </div>
+      <div class="step-item" style="border-bottom: none;">
+        <div class="step-num">3</div>
+        <div>
+          <div style="font-size: 12px; font-weight: 500; margin-bottom: 2px;">完了。整った肌へ。</div>
+          <div style="font-size: 11px; color: var(--gray);">朝夜どちらでも同じ手順</div>
+        </div>
+      </div>
+    </div>
+    <div class="note">💡 ★メイン動画はReels動画と素材を共有できる。ElevenLabsのナレーション「洗顔後これだけ、でいい」など。</div>
+  </section>
+
+  <!-- ⑥ ベネフィット -->
+  <section class="wf-section" id="benefit" style="background: var(--light);">
+    <div class="sec-label">⑥ BENEFIT — ベネフィット</div>
+    <div class="wf-title-en">WHY LUMEA SHIFT</div>
+    <div class="wf-title-jp">続けられる理由が、<br>ここにある。</div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px;">
+      <div style="display: flex; gap: 14px; align-items: center; background: var(--white); padding: 16px; border-radius: 4px;">
+        <div class="ph" style="width: 80px; height: 80px; border-radius: 4px; flex-shrink: 0;">
+          <div style="font-size: 9px; text-align: center;">静止画<br>商品アップ</div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 500; margin-bottom: 4px;">「ラクだから、続く」</div>
+          <div style="font-size: 11px; color: var(--gray); line-height: 1.6;">工程が少ないから、疲れた日でも習慣になる。</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: center; background: var(--white); padding: 16px; border-radius: 4px;">
+        <div class="ph" style="width: 80px; height: 80px; border-radius: 4px; flex-shrink: 0;">
+          <div style="font-size: 9px; text-align: center;">静止画<br>キャラ笑顔</div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 500; margin-bottom: 4px;">「清潔感が、整う」</div>
+          <div style="font-size: 11px; color: var(--gray); line-height: 1.6;">仕事前の安心感。"ちゃんとしてる感"が出る。</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: center; background: var(--white); padding: 16px; border-radius: 4px;">
+        <div class="ph video-ph" style="width: 80px; height: 80px; border-radius: 4px; flex-shrink: 0;">
+          <div style="font-size: 9px; text-align: center;">動画<br>テクスチャ</div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 500; margin-bottom: 4px;">「ベタつかない」</div>
+          <div style="font-size: 11px; color: var(--gray); line-height: 1.6;">軽いテクスチャで、朝でも不快感なし。</div>
+        </div>
+      </div>
+    </div>
+    <div class="note">💡 3つ目のベネフィットに商品テクスチャの短い動画（水感・なじむ感）を入れると効果的。</div>
+  </section>
+
+  <!-- ⑦ 口コミ -->
+  <section class="wf-section" id="voice">
+    <div class="sec-label">⑦ VOICE — お客様の声</div>
+    <div class="wf-title-en">REAL VOICES</div>
+    <div class="wf-title-jp">使った人の、リアルな声。</div>
+
+    <!-- 口コミカード -->
+    <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 16px;">
+
+      <div class="card">
+        <div class="card-body">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+            <div class="ph" style="width: 40px; height: 40px; border-radius: 50%;">
+              <div style="font-size: 9px;">顔</div>
+            </div>
+            <div>
+              <div style="font-size: 12px; font-weight: 500;">28歳 / 会社員</div>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+          <div style="font-size: 12px; color: #555; line-height: 1.7; border-left: 2px solid var(--accent); padding-left: 10px;">
+            「1本でいい」って割り切れるから、むしろ続いてます。
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+            <div class="ph" style="width: 40px; height: 40px; border-radius: 50%;">
+              <div style="font-size: 9px;">顔</div>
+            </div>
+            <div>
+              <div style="font-size: 12px; font-weight: 500;">32歳 / 営業職</div>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+          <div style="font-size: 12px; color: #555; line-height: 1.7; border-left: 2px solid var(--accent); padding-left: 10px;">
+            ベタつくのが苦手ですが、これは軽くて使いやすいです。
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+            <div class="ph" style="width: 40px; height: 40px; border-radius: 50%;">
+              <div style="font-size: 9px;">顔</div>
+            </div>
+            <div>
+              <div style="font-size: 12px; font-weight: 500;">35歳 / IT系</div>
+              <div class="stars">★★★★☆</div>
+            </div>
+          </div>
+          <div style="font-size: 12px; color: #555; line-height: 1.7; border-left: 2px solid var(--accent); padding-left: 10px;">
+            "ちゃんとしてる感"が出る感じ。仕事前の安心感が違います。
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="note">💡 顔写真はAI生成キャラで統一。口コミは課題記載のものをそのまま使用。</div>
+  </section>
+
+  <!-- ⑧ FAQ -->
+  <section class="wf-section" id="faq" style="background: var(--light);">
+    <div class="sec-label">⑧ FAQ</div>
+    <div class="wf-title-en">QUESTIONS</div>
+    <div class="wf-title-jp">よくあるご質問</div>
+
+    <div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Q</span>本当にこれ1本で大丈夫ですか？</div>
+        <div class="text-ph long"></div>
+        <div class="text-ph mid"></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Q</span>ベタつきませんか？</div>
+        <div class="text-ph long"></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Q</span>男性でも使えますか？</div>
+        <div class="text-ph mid"></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Q</span>解約は簡単にできますか？</div>
+        <div class="text-ph long"></div>
+        <div class="text-ph short"></div>
+      </div>
+      <div class="faq-item" style="border-bottom: none;">
+        <div class="faq-q"><span>Q</span>敏感肌でも使えますか？</div>
+        <div class="text-ph long"></div>
+        <div class="text-ph mid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑨ CTA -->
+  <section class="wf-section" id="cta" style="background: #1A1714;">
+    <div class="sec-label cta-label">⑨ CTA — 購入</div>
+
+    <!-- 商品画像 -->
+    <div class="ph video-ph" style="height: 220px; border-radius: 4px; margin-bottom: 20px;">
+      <div class="ph-icon">📦</div>
+      <div class="ph-label">商品画像 or 短い動画</div>
+      <div class="ph-sub">テクスチャ動画 / キャラ使用シーン</div>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 24px;">
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 11px; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 8px;">LUMEA SHIFT</p>
+      <div class="price-box" style="background: rgba(255,255,255,0.05); border-color: #3A3028; margin-bottom: 16px;">
+        <div style="font-size: 10px; color: #888; text-decoration: line-through; margin-bottom: 4px;">通常 ¥3,980</div>
+        <div class="price-main" style="color: #F5F0EA;">¥1,980</div>
+        <div class="price-sub" style="color: #888;">初回限定価格（税込）</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; font-size: 10px; color: #666; margin-bottom: 20px;">
+        <div>✓ 初回送料無料</div>
+        <div>✓ 回数縛りなし</div>
+        <div>✓ 5日前まで解約OK</div>
+      </div>
+    </div>
+
+    <div class="btn-ph gold" style="margin-bottom: 10px; font-size: 14px; height: 58px;">まず1本、試してみる</div>
+    <div class="btn-ph" style="background: transparent; border: 1px solid #3A3028; color: #888; height: 44px; font-size: 12px; margin-bottom: 20px;">定期購入の詳細を見る</div>
+    <div class="btn-ph line" style="height: 48px; font-size: 12px;">LINE で相談・登録する</div>
+
+    <div class="note" style="border-left-color: var(--gold); background: rgba(184,151,90,0.1);">
+      💡 CTA動画案：テクスチャや商品が画面を流れる短い動画をループ背景に。「1本持っておく」の弱めCTAを意識。
+    </div>
+  </section>
+
+  <!-- ⑩ Footer -->
+  <section class="wf-section" id="footer" style="background: var(--text); padding: 32px 20px;">
+    <div class="sec-label" style="background: #555;">⑩ FOOTER</div>
+    <div style="margin-bottom: 20px;">
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 18px; color: #F5F0EA; letter-spacing: 0.2em; margin-bottom: 4px;">LUMEA SHIFT</p>
+      <p style="font-size: 10px; color: #666;">朝夜兼用オールインワン保湿美容液</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; font-size: 11px; color: #666;">
+      <a href="#" style="color: #666; text-decoration: none;">特定商取引法に基づく表記</a>
+      <a href="#" style="color: #666; text-decoration: none;">プライバシーポリシー</a>
+      <a href="#" style="color: #666; text-decoration: none;">お問い合わせ</a>
+      <a href="#" style="color: #666; text-decoration: none;">会社概要</a>
+    </div>
+    <div style="font-size: 10px; color: #555; border-top: 1px solid #2A2A2A; padding-top: 16px;">
+      © 2026 LUMEA BEAUTY株式会社
+    </div>
+  </section>
+
+</div>
+
+<!-- 素材リストサマリー -->
+<div style="max-width: 430px; margin: 0 auto 40px; padding: 0 16px;">
+  <div style="background: var(--white); border-radius: 4px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+    <div style="font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--accent);">📋 必要素材サマリー</div>
+
+    <div style="margin-bottom: 16px;">
+      <div style="font-size: 11px; font-weight: 500; color: var(--gold); margin-bottom: 8px;">▌ 動画（5本）</div>
+      <div style="font-size: 11px; color: #666; line-height: 2;">
+        V1｜FV背景動画（キャラ×朝の支度・3〜5秒ループ）<br>
+        V2｜解決イメージ動画（複数→1本の変換・5秒）<br>
+        V3｜使用シーンメイン動画（朝夜・15〜20秒）★核<br>
+        V4｜ベネフィット：テクスチャ動画（なじむ感・3秒）<br>
+        V5｜CTA背景動画（商品流れる・ループ）
+      </div>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <div style="font-size: 11px; font-weight: 500; color: var(--text); margin-bottom: 8px;">▌ 静止画（12枚以上）</div>
+      <div style="font-size: 11px; color: #666; line-height: 2;">
+        S1｜商品画像（白背景・ボトル単体）× 2〜3パターン<br>
+        S2｜キャラ（疲れ顔・困り顔）× 3枚（悩みセクション）<br>
+        S3｜キャラ（笑顔・明るい）× 2枚（ベネフィット・口コミ）<br>
+        S4｜朝の洗面台シーン（使用シーン朝タブ）<br>
+        S5｜口コミ用キャラ顔写真 × 3枚<br>
+        S6｜成分イメージ（テクスチャ・素材感）
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size: 11px; font-weight: 500; color: #6B4C3B; margin-bottom: 8px;">▌ ロゴ・ブランド素材</div>
+      <div style="font-size: 11px; color: #666; line-height: 2;">
+        L1｜LUMEA SHIFTロゴ（白ver・黒ver）<br>
+        L2｜商品ボトルデザイン（一貫して使う基準画像）
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
