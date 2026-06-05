@@ -28,8 +28,16 @@
 <section class="fv" id="fv">
 <div class="fv-img-wrap">
   <video
-    class="fv-video-bg"
+    class="fv-video-bg fv-video-sp"
     src="video/fv-video.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+  ></video>
+  <video
+    class="fv-video-bg fv-video-pc"
+    src="video/fv-video-PC.mp4"
     autoplay
     muted
     loop
@@ -392,27 +400,31 @@
 <!-- ⑨ CTA -->
 <section class="cta-sec" id="cta">
   <div class="sec-inner">
-    <div class="cta-img">
-      <img src="img/cta-smile.png" alt="LUMEA SHIFTを使った朝">
-    </div>
-    <div class="cta-logo">
-      <img src="img/logo.png" alt="LUMEA SHIFT" class="cta-logo-img">
-    </div>
-    <p class="cta-msg reveal">まず1本だけ、持っておく。<br><span>それだけでいいんです。</span></p>
-    <div class="price-box reveal">
-      <div class="price-orig">通常価格 ¥3,980（税込）</div>
-      <div class="price-main">¥1,980</div>
-      <div class="price-unit">初回限定価格（税込）</div>
-      <div class="price-badge">初回送料無料</div>
-    </div>
-    <div class="cta-checks reveal">
-      <div class="cta-check">✓ 回数縛りなし</div>
-      <div class="cta-check">✓ 次回発送5日前まで解約OK</div>
-      <div class="cta-check">✓ 初回送料無料</div>
-    </div>
-    <div class="cta-btns reveal">
-      <button class="btn-primary btn-primary--full">まず1本、試してみる →</button>
-      <button class="btn-line">LINE で相談・登録する</button>
+    <div class="cta-inner-pc">
+      <div class="cta-img">
+        <img src="img/cta-smile.png" alt="LUMEA SHIFTを使った朝">
+      </div>
+      <div class="cta-right">
+        <div class="cta-logo">
+          <img src="img/logo.png" alt="LUMEA SHIFT" class="cta-logo-img">
+        </div>
+        <p class="cta-msg reveal">まず1本だけ、持っておく。<br><span>それだけでいいんです。</span></p>
+        <div class="price-box reveal">
+          <div class="price-orig">通常価格 ¥3,980（税込）</div>
+          <div class="price-main">¥1,980</div>
+          <div class="price-unit">初回限定価格（税込）</div>
+          <div class="price-badge">初回送料無料</div>
+        </div>
+        <div class="cta-checks reveal">
+          <div class="cta-check">✓ 回数縛りなし</div>
+          <div class="cta-check">✓ 次回発送5日前まで解約OK</div>
+          <div class="cta-check">✓ 初回送料無料</div>
+        </div>
+        <div class="cta-btns reveal">
+          <button class="btn-primary btn-primary--full">まず1本、試してみる →</button>
+          <button class="btn-line">LINE で相談・登録する</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
