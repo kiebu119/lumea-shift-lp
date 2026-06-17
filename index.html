@@ -17,15 +17,34 @@
 <meta property="og:image" content="https://kiebu119.github.io/lumea-shift-lp/img/cta-smile.png">
 <meta property="og:url" content="https://kiebu119.github.io/lumea-shift-lp/">
 </head>
-<body>＃
-
-<!-- NAV -->
-<nav class="nav" id="nav">
-  <div class="nav-logo">
-    <img src="img/logo.png" alt="LUMEA SHIFT" class="nav-logo-img">
+<!-- 注文モーダル -->
+<div id="order-modal" class="modal-overlay" style="display:none;">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 class="modal-title">初回お試し申し込み</h3>
+    <p class="modal-price">¥1,980（税込）/ 送料無料 / 縛りなし</p>
+    <div class="modal-form">
+      <input type="text" id="f-name" placeholder="お名前" required>
+      <span class="form-error" id="err-name"></span>
+      <input type="email" id="f-email" placeholder="メールアドレス" required>
+      <span class="form-error" id="err-email"></span>
+      <input type="tel" id="f-phone" placeholder="電話番号" required>
+      <span class="form-error" id="err-phone"></span>
+      <input type="text" id="f-zip" placeholder="郵便番号（例：123-4567）" required>
+      <span class="form-error" id="err-zip"></span>
+      <textarea id="f-address" placeholder="住所" required></textarea>
+      <span class="form-error" id="err-address"></span>
+      <input type="number" id="f-quantity" value="1" min="1" readonly>
+      <button class="btn-submit" onclick="submitOrder()">申し込む →</button>
+    </div>
+    <div id="thanks-msg" style="display:none; text-align:center; padding: 20px 0;">
+      <p style="font-size:18px; font-weight:bold; margin-bottom:8px;">お申し込みありがとうございます！</p>
+      <p style="font-size:13px; color:#888;">確認メールをお送りします。<br>しばらくお待ちください。</p>
+    </div>
   </div>
-  <button class="nav-btn" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">試してみる</button>
-</nav>
+</div>
+</div>
+<body>
 
 <!-- ① FV -->
 <section class="fv" id="fv">
@@ -53,7 +72,7 @@
     <h1 class="fv-headline">帰宅が遅い日は、<br>全部やるの無理。</h1>
     <div class="fv-rule"></div>
 <p class="fv-sub" style="margin-bottom: 80px;">それでいい。1本で整えるだけでいい。<br>LUMEA SHIFTは、忙しい日のための美容液。</p>    <div class="fv-btns">
-      <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">まず1本、試してみる →</button>
+      <button class="btn-primary" onclick="openModal()">まず1本、試してみる →</button>
       <button class="btn-ghost" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">定期購入の詳細を見る</button>
     </div>
     <p class="fv-note">初回¥1,980 / 送料無料 / 縛りなし</p>
@@ -67,14 +86,14 @@
 <!-- 信頼バー -->
 <div class="trust-bar">
   <div class="trust-item">
-    <div class="trust-label"><strong>1本</strong>で完結</div>
-  </div>
-  <div class="trust-item">
-    <div class="trust-label"><strong>朝夜</strong>どちらでも</div>
-  </div>
-  <div class="trust-item">
-    <div class="trust-label"><strong>縛り</strong>なし</div>
-  </div>
+  <div class="trust-label"><strong>1本で完結</strong></div>
+</div>
+<div class="trust-item">
+  <div class="trust-label"><strong>朝夜どちらでも</strong></div>
+</div>
+<div class="trust-item">
+  <div class="trust-label"><strong>縛りなし</strong></div>
+</div>
 </div>
 
 <!-- ② PROBLEM -->
@@ -446,7 +465,7 @@
     <span class="sticky-price-num">¥1,980</span>
     <span class="sticky-price-note">初回 / 縛りなし</span>
   </div>
-  <button class="sticky-btn" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">試してみる →</button>
+  <button class="sticky-btn" onclick="openModal()">試してみる →</button>
 </div>
 
 <script src="script.js"></script>
