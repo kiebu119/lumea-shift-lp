@@ -256,11 +256,13 @@ button { cursor: pointer; font-family: var(--sans); }
 .sol-compare { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
 .sol-before { flex: 1; display: flex; flex-direction: column; gap: 6px; }
 .sol-step {
-  font-size: 12px; color: #999;
-  padding: 8px; text-align: center;
+  font-size: 15px; color: #555;
+  padding: 10px 12px; text-align: center;
   background: white; border-radius: 6px;
+  border-left: 3px solid var(--accent);
+  font-weight: 500;
 }
-.sol-step--fade { opacity: 0.4; }
+.sol-step--fade { opacity: 0.4; border-left: none; }
 .sol-arrow { font-size: 22px; color: var(--accent); flex-shrink: 0; }
 .sol-after {
   flex: 1; background: var(--accent);
@@ -270,12 +272,11 @@ button { cursor: pointer; font-family: var(--sans); }
 }
 .sol-after-num {
   font-family: var(--serif-en);
-  font-size: 44px; font-weight: 300;
+  font-size: 56px; font-weight: 300;
   font-style: italic; line-height: 1;
 }
-.sol-after-num small { font-size: 20px; font-style: normal; }
-.sol-after-unit { font-size: 11px; opacity: 0.85; margin-top: 4px; display: block; }
-.sol-desc { font-size: 13px; color: var(--gray); line-height: 1.85; }
+.sol-after-num small { font-size: 24px; font-style: normal; }
+.sol-after-unit { font-size: 16px; opacity: 0.85; margin-top: 8px; display: block; font-weight: 500; }.sol-desc { font-size: 13px; color: var(--gray); line-height: 1.85; }
 
 /* ===== PRODUCT ===== */
 .prod-sub { font-size: 12px; color: #aaa; margin-bottom: 24px; margin-top: -20px; }
