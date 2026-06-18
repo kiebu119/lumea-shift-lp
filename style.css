@@ -804,7 +804,7 @@ button { cursor: pointer; font-family: var(--sans); }
   /* FOOTER */
   .footer-inner { display: flex; gap: 48px; align-items: flex-start; }
   .footer-links { flex-direction: row; gap: 24px; }
-
+  .footer { padding: 40px 0 80px; }
   /* STICKY CTA */
   .sticky-cta { max-width: 100%; padding: 12px 48px; }
 }
