@@ -799,8 +799,7 @@ button { cursor: pointer; font-family: var(--sans); }
   }
   .cta-right { flex: 1; }
   .price-box { max-width: 480px; margin: 0 auto 20px; }
-  .cta-btns { max-width: 480px; margin: 0 auto; }
-  .btn-line { max-width: 480px; margin: 10px auto 0; }
+.cta-btns { max-width: 480px; margin: 0 auto; padding-bottom: 80px; }  .btn-line { max-width: 480px; margin: 10px auto 0; }
 
   /* FOOTER */
   .footer-inner { display: flex; gap: 48px; align-items: flex-start; }
