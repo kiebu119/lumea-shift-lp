@@ -635,6 +635,21 @@ button { cursor: pointer; font-family: var(--sans); }
   border-radius: 12px;
   display: block;
 }
+.lp-video {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+.lp-video-canva {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  max-width: 100%;
+}
 
 /* ===== MODAL ===== */
 .modal-overlay {
