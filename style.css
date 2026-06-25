@@ -91,6 +91,7 @@ button { cursor: pointer; font-family: var(--sans); }
 }
 .fv-video-pc { display: none; }
 .fv-sub {
+  font-family: var(--serif);
   font-size: 13px;
   color: rgba(255,255,255,0.6);
   line-height: 1.8;
@@ -213,7 +214,8 @@ button { cursor: pointer; font-family: var(--sans); }
   font-size: 15px;
   color: #fff;
   margin-bottom: 0;
-  font-weight: 500;
+  font-weight: 700;
+  font-family: var(--serif);
 }
 
 @keyframes slideIn {
