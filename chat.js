@@ -78,19 +78,28 @@ ${knowledgeText}`;
   }
   loadKnowledge();
 
-  // --- バックエンドに質問を投げる ---
+    // --- バックエンドに質問を投げる（20秒でタイムアウト） ---
   async function askBot(userInput) {
-    const res = await fetch(API_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userInput, systemPrompt }),
-    });
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 20000);
 
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok || !data.answer) {
-      throw new Error(data.error || ('HTTP ' + res.status));
+    try {
+      const res = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userInput, systemPrompt }),
+        signal: controller.signal,
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.answer) {
+        throw new Error(data.error || ('HTTP ' + res.status));
+      }
+      return data.answer;
+
+    } finally {
+      clearTimeout(timer);
     }
-    return data.answer;
   }
 
   // --- 送信 ---
