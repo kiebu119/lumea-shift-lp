@@ -176,3 +176,7 @@
   outline: 2px solid var(--accent-dark);
   outline-offset: 2px;
 }
+/* 応答待ちの表示 */
+.msg.is-thinking { color: var(--gray); font-style: italic; }
+.chat-input:disabled { opacity: 0.6; }
+.chat-send:disabled { opacity: 0.5; cursor: default; }
